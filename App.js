@@ -13,6 +13,7 @@ import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import Home from "./Home";
 import Form from "./Form" ;
 import Description from "./Description";
+import Update from "./Update";
 
 import AppContext from './AppContext';
 
@@ -34,6 +35,8 @@ const App = () => {
         <Stack.Screen name="Home" component={Home} />
         <Stack.Screen name="Form" component={Form} />
         <Stack.Screen name="Description" component={Description} />
+        <Stack.Screen name="Update" component={Update} />
+
         </Stack.Navigator>
         </NavigationContainer>
         </AppContext.Provider>

@@ -13,12 +13,12 @@ import {SafeAreaView} from 'react-native';
 import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {PaperProvider, Text, Button, Tooltip} from 'react-native-paper';
+import { ScrollView } from 'react-native-gesture-handler';
 
 //console.log the data recieved from the api before outputting it on screen
 //<Text style={styles.taskItem}>{item.productImage}</Text>
 
 //const [error, setError] = useState([]);
-
 
 
 const Home = ({route, navigation}) => {
@@ -27,7 +27,7 @@ const Home = ({route, navigation}) => {
   
   useEffect(() => {
 
-    fetch('http://10.67.45.171:5000/products')
+    fetch('http://10.67.36.143:5000/products')
   .then((response) => response.json())
   .then((result) => {
     setProducts(result)
@@ -45,23 +45,22 @@ console.log(products);
           {/*<View style={styles.inputContainer}>*/}
             <Button onPress={() => {navigation.navigate('Form')}} > Add products</Button>
           {/*</View>*/}
-          
-          <FlatList
-        data = {products}
-        renderItem={({ item }) => (
-          <TouchableOpacity onPress={() => {navigation.navigate('Description')}} >
-          <View style={styles.listItem}>
-              <Text style={styles.taskItem}>{item.productName}</Text>
-              <Text style={styles.taskItem}>{item.stock}</Text>
-              <Image
-                style={styles.photo} 
-                source={{uri: item.productImage}}
-                onError={(error) => console.error('Error loading image:', error.nativeEvent.error)}
-              />
-              </View>
-            </TouchableOpacity>
-            )}
-          />
+            <FlatList
+            data = {products}
+            renderItem={({ item }) => (
+            <TouchableOpacity onPress={() => {navigation.navigate('Description', {id: item.id})}} >
+            <View style={styles.listItem}>
+                <Text style={styles.taskItem}>{item.productName}</Text>
+                <Text style={styles.taskItem}>{item.stock}</Text>
+                <Image
+                  style={styles.photo} 
+                  source={{uri: item.productImage}}
+                  onError={(error) => console.error('Error loading image:', error.nativeEvent.error)}
+                />
+                </View>
+              </TouchableOpacity>
+              )}
+            />
         </SafeAreaView>
       </SafeAreaProvider>
     </PaperProvider>

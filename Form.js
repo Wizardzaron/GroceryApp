@@ -67,7 +67,7 @@ const Task = ({route, navigation}) => {
 
     
     try{
-        const posting = fetch('http://10.67.45.171:5000/product', {
+        const posting = fetch('http://10.67.36.143:5000/product', {
             method: 'POST',
             headers: {
               'Content-Type': 'multipart/form-data',

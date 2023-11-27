@@ -17,33 +17,53 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import {PaperProvider, Text} from 'react-native-paper';
 
+
 const Descript = ({route, navigation}) => {
-    const [products, setProducts] = useState([]);
+    const [item, setItem] = useState(null);
+
+    const {id} = route.params
+
+    console.log(id)
+
+    const url = 'http://10.67.36.143:5000/description?id=' + id;
 
     useEffect(() => {
 
-        fetch('http://10.67.45.171:5000/description?id=1')
+        fetch(url)
       .then((response) => response.json())
       .then((result) => {
-        setProducts(result)
+        setItem(result)
       })
       .catch(e => console.log(e))
-      },[])
+      },[id])
 
-    console.log(products)
+      if(item == null){
+        return <View/>
+      }
+
+      const userClickedDeleteTask = () => {
+
+        const url = 'http://10.67.36.143:5000/delete?id=' + id;        
+        fetch(url,{
+          method: 'DELETE',
+          headers: {
+            'Content-Type': 'application/json'
+          },
+          body: null
+        })
+      
+        navigation.goBack();
+      }
+
    return( 
     <PaperProvider>
     <SafeAreaProvider>
       <SafeAreaView>
-        <FlatList
-        data = {products}
-        renderItem={({ item }) => (
-          <View style={styles.listItem}>
               <Text style={styles.taskItem}>{item.productName}</Text>
               <Text style={styles.taskItem}>{item.manufacture}</Text>
               <Text style={styles.taskItem}>{item.price}</Text>
               <Text style={styles.taskItem}>{item.stock}</Text>
-              <Text style={styles.taskItem}>{item.Description}</Text>
+              <Text style={styles.taskItem}>{item.description}</Text>
 
 
               <Image
@@ -51,10 +71,17 @@ const Descript = ({route, navigation}) => {
                 source={{uri: item.productImage}}
                 onError={(error) => console.error('Error loading image:', error.nativeEvent.error)}
               />
-            </View>
-            )}
 
-        />
+              <View>
+              <Button title="DELETE" onPress={userClickedDeleteTask} />
+              </View>
+              <View>
+              <Button title="UPDATE STOCK" onPress={() => navigation.navigate('Update', {id: id})}  />
+              </View>
+              <View>
+              <Button title="GO BACK" onPress={() => navigation.goBack()} />
+              </View>
+
         </SafeAreaView>
       </SafeAreaProvider>
     </PaperProvider>
