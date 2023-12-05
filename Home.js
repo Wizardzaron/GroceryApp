@@ -19,15 +19,20 @@ import { ScrollView } from 'react-native-gesture-handler';
 //<Text style={styles.taskItem}>{item.productImage}</Text>
 
 //const [error, setError] = useState([]);
+/*
+// iOS and Android emulators use different
+// hostnames to refer to the host machine.
+const defaultHost =
+  Platform.OS == 'ios' ? 'http://127.0.0.1:5000' : 'http://10.0.2.2:5000';
 
-
+*/
 const Home = ({route, navigation}) => {
   const context = React.useContext(AppContext);
   const [products, setProducts] = useState([]);
   
   useEffect(() => {
 
-    fetch('http://10.67.36.143:5000/products')
+    fetch('https://groceryapp-backendside.fly.dev/products')
   .then((response) => response.json())
   .then((result) => {
     setProducts(result)

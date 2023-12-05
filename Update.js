@@ -40,7 +40,7 @@ const Update = ({route, navigation}) => {
 
   const updateForm = () => {
 
-    const url = 'http://10.67.36.143:5000/update?id=' + id;
+    const url = 'https://groceryapp-backendside.fly.dev/update?id=' + id;
 
     const formData = new FormData();
     const stockCount = parseInt(stock);

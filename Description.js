@@ -25,7 +25,7 @@ const Descript = ({route, navigation}) => {
 
     console.log(id)
 
-    const url = 'http://10.67.36.143:5000/description?id=' + id;
+    const url = 'https://groceryapp-backendside.fly.dev/description?id=' + id;
 
     useEffect(() => {
 
@@ -43,7 +43,7 @@ const Descript = ({route, navigation}) => {
 
       const userClickedDeleteTask = () => {
 
-        const url = 'http://10.67.36.143:5000/delete?id=' + id;        
+        const url = 'https://groceryapp-backendside.fly.dev/delete?id=' + id;        
         fetch(url,{
           method: 'DELETE',
           headers: {
